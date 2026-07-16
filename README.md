@@ -1,6 +1,6 @@
-# Payload Blank Template
+# Payload CMS Vercel Postgres Tailwind Template
 
-This template comes configured with the bare minimum to get started on anything you need.
+This project is a template for building applications with Payload CMS, Vercel Postgres, and Tailwind CSS.
 
 ## Quick start
 
