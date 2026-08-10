@@ -1,10 +1,30 @@
 # Payload CMS Vercel Postgres Tailwind Template
 
-This project is a template for building applications with Payload CMS, Vercel Postgres, and Tailwind CSS.
+This project is a template for building applications with Payload CMS, Vercel Postgres, Vercel Blob, and Tailwind CSS.
+
+## Stack
+
+| Dependency | Package | Purpose |
+| --- | --- | --- |
+| Payload CMS | `payload`, `@payloadcms/next`, `@payloadcms/ui`, `@payloadcms/richtext-lexical` | CMS, admin UI, and Lexical rich text |
+| Vercel Postgres | `@payloadcms/db-vercel-postgres` | Database adapter |
+| Vercel Blob | `@payloadcms/storage-vercel-blob` | Media / file storage for the Media collection |
+| Next.js | `next` | App framework |
+| Tailwind CSS | `tailwindcss`, `@tailwindcss/postcss` | Utility-first styling (v4) |
+| Tailwind Animations | `tailwind-animations` | Ready-made animation utilities (imported in `styles.css`) |
+
+Frontend styles live in `src/app/(frontend)/styles.css`:
+
+```css
+@import 'tailwindcss';
+@import 'tailwind-animations';
+```
+
+Vercel Blob is wired in `src/payload.config.ts` via `vercelBlobStorage` and stores Media uploads when `BLOB_READ_WRITE_TOKEN` is set.
 
 ## Quick start
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+This template can be deployed on Vercel with Vercel Postgres and Vercel Blob for the database and media storage.
 
 ## Quick Start - local setup
 
@@ -17,7 +37,10 @@ After you click the `Deploy` button above, you'll want to have standalone copy o
 ### Development
 
 1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+2. `cd my-project && cp .env.example .env` to copy the example environment variables. Set at least:
+   - `PAYLOAD_SECRET` — random secret for Payload
+   - `POSTGRES_URL` — your Vercel Postgres / Neon connection string
+   - `BLOB_READ_WRITE_TOKEN` — Vercel Blob read/write token (required for Media uploads)
 
 3. `pnpm install && pnpm dev` to install dependencies and start the dev server
 4. open `http://localhost:3000` to open the app in your browser
@@ -26,13 +49,7 @@ That's it! Changes made in `./src` will be reflected in your app. Follow the on-
 
 #### Docker (Optional)
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
-
-To do so, follow these steps:
-
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+If you prefer to use Docker for local development, the provided `docker-compose.yml` file can be used for a local database. Update `POSTGRES_URL` in your `.env` to match the compose service, then run `docker-compose up` (optionally with `-d`).
 
 ## How it works
 
@@ -50,7 +67,7 @@ See the [Collections](https://payloadcms.com/docs/configuration/collections) doc
 
 - #### Media
 
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures. Files are stored in Vercel Blob via `@payloadcms/storage-vercel-blob`.
 
 ### Docker
 
