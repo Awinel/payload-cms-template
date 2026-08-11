@@ -5,6 +5,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import './styles.css'
 import BlackHole from '@/components/BlackHole'
+import LucideIcon from '@/components/LucideIcon'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -18,7 +19,7 @@ export default async function HomePage() {
 
   return (
     <BlackHole>
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center h-screen text-white">
         <div className="flex flex-col items-center justify-center">
           <picture className="animate-iteration-count-infinite animate-float animate-duration-3000">
             <source srcSet="/logo.png" />
@@ -31,18 +32,19 @@ export default async function HomePage() {
               loading="eager"
             />
           </picture>
-          {!user && <h1>Welcome to your new project.</h1>}
+          {!user && <h1>Welcome to your new PayloadCMS project.</h1>}
           {user && <h1>Welcome back, {user.email}</h1>}
         </div>
-        <div className="text-center">
-          <h3 className="my-4">What this template includes:</h3>
+        <div className="text-center mb-4">
+          <h3 className="my-4">This template includes:</h3>
           <ul className="flex gap-4 ">
             {siteSettings?.implementations?.map((implementation, index) => (
               <li
-                className="py-2 px-4 rounded-md"
+                className="flex items-center gap-2 py-2 px-4 rounded-md"
                 style={{ backgroundColor: implementation.color ?? '#000000' }}
                 key={index}
               >
+                <LucideIcon name={implementation.icon ?? ''} className="size-4" />
                 {implementation.name}
               </li>
             ))}
@@ -50,7 +52,7 @@ export default async function HomePage() {
         </div>
         <div className="flex gap-4">
           <a
-            className="bg-gray-900 text-white my-3 px-4 py-2 rounded-md"
+            className="bg-gray-900 my-3 px-4 py-2 rounded-md"
             href={payloadConfig.routes.admin}
             rel="noopener noreferrer"
             target="_blank"
@@ -58,7 +60,7 @@ export default async function HomePage() {
             Go to admin panel
           </a>
           <a
-            className="bg-green-500 text-white my-3 px-4 py-2 rounded-md"
+            className="bg-green-500 my-3 px-4 py-2 rounded-md"
             href="https://payloadcms.com/docs"
             rel="noopener noreferrer"
             target="_blank"

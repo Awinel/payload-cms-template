@@ -15,6 +15,13 @@ export const SiteSettings: GlobalConfig = {
           name: 'color',
           type: 'text',
         },
+        {
+          name: 'icon',
+          type: 'text',
+          admin: {
+            description: 'Lucide icon name in PascalCase (e.g. Database, Cloud, Zap)',
+          },
+        },
       ],
     },
   ],

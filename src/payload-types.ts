@@ -329,6 +329,10 @@ export interface SiteSetting {
     | {
         name?: string | null;
         color?: string | null;
+        /**
+         * Lucide icon name in PascalCase (e.g. Database, Cloud, Zap)
+         */
+        icon?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -345,6 +349,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         name?: T;
         color?: T;
+        icon?: T;
         id?: T;
       };
   updatedAt?: T;
