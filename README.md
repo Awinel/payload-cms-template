@@ -12,6 +12,7 @@ This project is a template for building applications with Payload CMS, Vercel Po
 | Next.js | `next` | App framework |
 | Tailwind CSS | `tailwindcss`, `@tailwindcss/postcss` | Utility-first styling (v4) |
 | Tailwind Animations | `tailwind-animations` | Ready-made animation utilities (imported in `styles.css`) |
+| Lucide React | `lucide-react` | Icon library for React applications |
 
 Frontend styles live in `src/app/(frontend)/styles.css`:
 
