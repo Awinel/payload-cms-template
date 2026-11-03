@@ -1,11 +1,13 @@
 import { headers as getHeaders } from 'next/headers.js'
 import Image from 'next/image'
+import Link from 'next/link'
 import { getPayload } from 'payload'
 
 import config from '@/payload.config'
 import './styles.css'
 import BlackHole from '@/components/BlackHole'
 import LucideIcon from '@/components/LucideIcon'
+import SignOut from '@/components/SignOut'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -67,6 +69,13 @@ export default async function HomePage() {
           >
             Documentation
           </a>
+          {user ? (
+            <SignOut className="bg-red-600 my-3 px-4 py-2 rounded-md cursor-pointer" />
+          ) : (
+            <Link className="bg-blue-600 my-3 px-4 py-2 rounded-md" href="/login">
+              Log in
+            </Link>
+          )}
         </div>
       </div>
     </BlackHole>
